@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "mode": "strict",
+  "projects": [
+    {
+      "path": ".",
+      "targets": [
+        "ComplexAnalysis",
+        "ComplexAnalysisTest"
+      ],
+      "source_dir": ".",
+      "exclude": {}
+    }
+  ],
+  "docs_only_paths": [
+    "README.md"
+  ]
+}

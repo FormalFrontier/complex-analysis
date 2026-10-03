@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/v0.4.schema.json
+version: "v0.4"
+project:
+  name: ComplexAnalysis
+  description: >-
+    Complex Fréchet differentiability on open subsets of finite-dimensional
+    complex normed spaces implies local analyticity for maps into complete
+    complex normed spaces. The proof uses an iterated polydisc Cauchy formula,
+    analytic continuous-function-valued kernels, and bounded vector-valued
+    integration. The integration API is independently importable.
+  authors: [Formal Frontier Agents]
+  license: Apache-2.0
+sources:
+  - title: The classical Cauchy integral formula on polydiscs
+    type: folklore
+    relationship: independently-proves
+    note: Iterated boundary integration gives the vector-valued formula on a polydisc.
+automation:
+  methods:
+    - method: agent
+      framework: Codex and Hive
+      prompting_notes: Agent-assisted mathematical formalization using Mathlib.
+review:
+  status: agent-reviewed
+alignment:
+  statements: []

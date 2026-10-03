@@ -1,0 +1,32 @@
+name = "complexAnalysis"
+version = "0.1.0"
+defaultTargets = ["ComplexAnalysis", "ComplexAnalysisTest"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "83abb3e776bdefcbc447a1e44d0debe4010039e5"
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+weak.linter.style.header = false
+
+[[lean_lib]]
+name = "ComplexAnalysis"
+globs = ["ComplexAnalysis", "ComplexAnalysis.Analysis.Complex.FiniteDimensional",
+  "ComplexAnalysis.Analysis.Complex.PolydiscAnalytic",
+  "ComplexAnalysis.Analysis.Complex.PolydiscKernel",
+  "ComplexAnalysis.Analysis.Complex.TorusCauchy",
+  "ComplexAnalysis.Analysis.Complex.TorusKernel",
+  "ComplexAnalysis.MeasureTheory.Integral.ContinuousMap"]
+
+[[lean_lib]]
+name = "ComplexAnalysisTest"
+globs = ["ComplexAnalysisTest", "ComplexAnalysisTest.Analysis.Complex.FiniteDimensional",
+  "ComplexAnalysisTest.Analysis.Complex.PolydiscAnalytic",
+  "ComplexAnalysisTest.Analysis.Complex.PolydiscKernel",
+  "ComplexAnalysisTest.Analysis.Complex.TorusCauchy",
+  "ComplexAnalysisTest.Analysis.Complex.TorusKernel",
+  "ComplexAnalysisTest.MeasureTheory.Integral.ContinuousMap"]
