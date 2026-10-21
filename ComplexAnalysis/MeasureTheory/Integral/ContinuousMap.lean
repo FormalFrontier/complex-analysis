@@ -72,7 +72,6 @@ theorem norm_integralCLM_le : ‖integralCLM (F := F) μ‖ ≤ μ.real univ :=
   LinearMap.mkContinuous_norm_le _ (by positivity) _
 
 /-- Integration sends a constant function to its value scaled by the total mass. -/
-@[simp]
 theorem integralCLM_const (value : F) :
     integralCLM μ (ContinuousMap.const X value) = μ.real univ • value := by
   simp [integralCLM_apply]

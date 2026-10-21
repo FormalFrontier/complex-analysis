@@ -1,4 +1,5 @@
 name = "complexAnalysis"
+lintDriver = "batteries/runLinter"
 version = "0.1.0"
 defaultTargets = ["ComplexAnalysis", "ComplexAnalysisTest"]
 

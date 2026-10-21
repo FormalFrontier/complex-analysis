@@ -186,7 +186,7 @@ theorem norm_smulRightCLM_le [CompactSpace X]
 continuous vector-valued function. -/
 theorem analyticAt_cauchyKernelProd_smul [CompactSpace X]
     {F : Type w} [NormedAddCommGroup F]
-    [NormedSpace ℂ F] [CompleteSpace F] [Fintype ι] (a : ι → C(X, ℂ)) (s : Finset ι)
+    [NormedSpace ℂ F] [Fintype ι] (a : ι → C(X, ℂ)) (s : Finset ι)
     (b : C(X, F)) :
     AnalyticAt ℂ (fun z : ι → ℂ => smulRightCLM b (cauchyKernelProd a s z)) 0 :=
   ((smulRightCLM b).analyticAt _).comp (analyticAt_cauchyKernelProd a s)
