@@ -89,8 +89,11 @@ differentiability. No sheaf or geometric theorem is asserted.
 The polynomial boundary-degree proof uses Mathlib's existing algebraic closedness
 of `ℂ` (the fundamental theorem of algebra), its split-polynomial induction and
 root multisets, and Sphere Topology's additivity of circle degree under pointwise
-multiplication. It does not give a new proof of the fundamental theorem of algebra
-or construct the exterior and disk maps from May's problem.
+multiplication. Polynomials nonvanishing on the closed unit disk also carry an
+explicit disk-scaling homotopy from their constant phase at zero to their
+normalized boundary map; consequently this boundary map has degree zero.
+The library does not give a new proof of the fundamental theorem of algebra or
+construct the exterior homotopy in the preceding §7 argument.
 
 ## References
 

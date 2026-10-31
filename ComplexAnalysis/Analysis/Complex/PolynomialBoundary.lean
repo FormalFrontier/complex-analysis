@@ -6,6 +6,7 @@ module
 
 public import Mathlib.Algebra.Polynomial.Roots
 public import Mathlib.Topology.Algebra.Polynomial
+public import Mathlib.Topology.Homotopy.Basic
 public import SphereTopology.Homotopy.CircleDegree
 public import SphereTopology.Homotopy.Sphere
 import Mathlib.Analysis.Complex.Polynomial.Basic
@@ -18,17 +19,23 @@ self-map by normalizing its values. This is an unbased map: its value at `1` is
 not required to be `1`. The ambient evaluation formula is
 `‖p.eval (z : ℂ)‖⁻¹ • p.eval (z : ℂ)`.
 
-Its degree counts roots strictly inside the unit disk with their multiset
-multiplicities. The proof uses the constant and linear-factor calculations,
-additivity of circle degree under pointwise multiplication, and Mathlib's
-algebraic closedness of `ℂ` to induct on split polynomials. In particular, it
-uses the existing fundamental theorem of algebra rather than proving it anew;
-it does not construct May's exterior or disk maps.
+For a polynomial with no zeros on the closed unit disk, normalizing `p(tz)`
+gives a homotopy from the constant phase of `p(0)` to its boundary map. The
+parameter precedes the circle point, following Mathlib's homotopy convention.
+
+The boundary degree counts roots strictly inside the unit disk with their
+multiset multiplicities. The root-count proof uses the constant and linear-factor
+calculations, additivity of circle degree under pointwise multiplication, and
+Mathlib's algebraic closedness of `ℂ` to induct on split polynomials. Thus the
+root-count identity retains the existing fundamental theorem of algebra as an
+input; this module does not construct the exterior polynomial homotopy.
 
 ## References
 
 * J. Peter May, *A Concise Course in Algebraic Topology*, Chapter 1, §7,
-  Problem (1), p. 11, for the degree and root-multiplicity identity.
+  p. 10 (PDF p. 18), for the disk-scaling homotopy in the proof of the
+  fundamental theorem of algebra; Problem (1), p. 11, for the degree and
+  root-multiplicity identity.
 * Mathlib supplies polynomial continuity, root multisets, split-polynomial
   induction, the fundamental theorem of algebra and the complex circle.
   Sphere Topology supplies normalization of nowhere-zero continuous maps and
@@ -90,6 +97,66 @@ theorem degree_normalizedCircleMap_C (c : ℂ)
 
 open scoped unitInterval
 
+/-- The disk-scaling homotopy of a polynomial with no zeros on the closed unit
+disk, from the constant phase of its value at zero to its normalized boundary
+map. This is May's family in Chapter 1, §7, p. 10, with time as the first
+coordinate. No basedness condition is imposed. -/
+def normalizedCircleMapDiskHomotopy (p : ℂ[X])
+    (hClosed : ∀ w : ℂ, ‖w‖ ≤ 1 → p.eval w ≠ 0) :
+    ContinuousMap.Homotopy
+      (ContinuousMap.const Circle
+        (⟨NormedSpace.normalize (p.eval 0), mem_sphere_zero_iff_norm.mpr
+          (NormedSpace.norm_normalize
+            (hClosed 0 ((norm_zero : ‖(0 : ℂ)‖ = 0).le.trans zero_le_one)))⟩ : Circle))
+      (p.normalizedCircleMap (fun z => hClosed (z : ℂ) (le_of_eq z.norm_coe))) := by
+  let V : C(I × Circle, ℂ) :=
+    ⟨fun q => p.eval (((q.1 : ℝ) : ℂ) * (q.2 : ℂ)),
+      p.continuous.comp
+        ((Complex.continuous_ofReal.comp
+          (continuous_subtype_val.comp continuous_fst)).mul
+          (continuous_subtype_val.comp continuous_snd))⟩
+  have hV : ∀ q, V q ≠ 0 := by
+    intro q
+    apply hClosed
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg q.1.2.1,
+      Circle.norm_coe, mul_one]
+    exact q.1.2.2
+  let N := ContinuousMap.normalizeOfNoZero V hV
+  exact
+    { toFun q := ⟨N q, mem_sphere_zero_iff_norm.mpr
+        (ContinuousMap.norm_normalizeOfNoZero V hV q)⟩
+      continuous_toFun := N.continuous.subtype_mk _
+      map_zero_left z := by
+        apply Subtype.ext
+        change N (0, z) = NormedSpace.normalize (p.eval 0)
+        rw [ContinuousMap.normalizeOfNoZero_apply]
+        change NormedSpace.normalize (p.eval (((0 : ℝ) : ℂ) * (z : ℂ))) = _
+        simp only [Complex.ofReal_zero, zero_mul]
+      map_one_left z := by
+        apply Subtype.ext
+        change N (1, z) = (p.normalizedCircleMap _ z : ℂ)
+        rw [ContinuousMap.normalizeOfNoZero_apply, normalizedCircleMap_apply]
+        change NormedSpace.normalize (p.eval (((1 : ℝ) : ℂ) * (z : ℂ))) = _
+        simp only [Complex.ofReal_one, one_mul, NormedSpace.normalize] }
+
+/-- Ambient evaluation of the polynomial disk-scaling homotopy at every time
+and circle point, including time zero. -/
+@[simp]
+theorem normalizedCircleMapDiskHomotopy_apply (p : ℂ[X])
+    (hClosed : ∀ w : ℂ, ‖w‖ ≤ 1 → p.eval w ≠ 0) (t : I) (z : Circle) :
+    ((p.normalizedCircleMapDiskHomotopy hClosed).toContinuousMap (t, z) : ℂ) =
+      ‖p.eval (((t : ℝ) : ℂ) * (z : ℂ))‖⁻¹ •
+        p.eval (((t : ℝ) : ℂ) * (z : ℂ)) := rfl
+
+/-- A polynomial with no zeros on the closed unit disk has normalized boundary
+degree zero, as in May, Chapter 1, §7, p. 10. -/
+theorem degree_normalizedCircleMap_eq_zero_of_forall_norm_le_one (p : ℂ[X])
+    (hClosed : ∀ w : ℂ, ‖w‖ ≤ 1 → p.eval w ≠ 0) :
+    Circle.degree
+      (p.normalizedCircleMap (fun z => hClosed (z : ℂ) (le_of_eq z.norm_coe))) = 0 := by
+  exact (Circle.degree_eq_of_homotopic
+    ⟨p.normalizedCircleMapDiskHomotopy hClosed⟩).symm.trans (Circle.degree_const _)
+
 private theorem degree_normalizedCircleMap_X_sub_C_of_norm_lt (a : ℂ)
     (h : ∀ z : Circle, (X - C a : ℂ[X]).eval (z : ℂ) ≠ 0) (ha : ‖a‖ < 1) :
     Circle.degree ((X - C a : ℂ[X]).normalizedCircleMap h) = 1 := by
@@ -133,43 +200,12 @@ private theorem degree_normalizedCircleMap_X_sub_C_of_norm_lt (a : ℂ)
 private theorem degree_normalizedCircleMap_X_sub_C_of_one_lt_norm (a : ℂ)
     (h : ∀ z : Circle, (X - C a : ℂ[X]).eval (z : ℂ) ≠ 0) (ha : 1 < ‖a‖) :
     Circle.degree ((X - C a : ℂ[X]).normalizedCircleMap h) = 0 := by
-  have ha0 : a ≠ 0 := norm_pos_iff.mp (lt_trans zero_lt_one ha)
-  let c : Circle := ⟨NormedSpace.normalize (-a), mem_sphere_zero_iff_norm.mpr
-    (NormedSpace.norm_normalize (neg_ne_zero.mpr ha0))⟩
-  let V : C(I × Circle, ℂ) :=
-    ⟨fun q => (q.1 : ℝ) • (q.2 : ℂ) - a,
-      ((continuous_subtype_val.comp continuous_fst).smul
-        (continuous_subtype_val.comp continuous_snd)).sub continuous_const⟩
-  have hV : ∀ q, V q ≠ 0 := by
-    intro q hq
-    have hnorm : ‖(q.1 : ℝ) • (q.2 : ℂ)‖ ≤ 1 := by
-      rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg q.1.2.1,
-        Circle.norm_coe, mul_one]
-      exact q.1.2.2
-    have heq : (q.1 : ℝ) • (q.2 : ℂ) = a := sub_eq_zero.mp hq
-    rw [heq] at hnorm
-    exact (not_le_of_gt ha) hnorm
-  let N := ContinuousMap.normalizeOfNoZero V hV
-  let H : ContinuousMap.Homotopy (ContinuousMap.const Circle c)
-      ((X - C a : ℂ[X]).normalizedCircleMap h) :=
-    { toFun q := ⟨N q, mem_sphere_zero_iff_norm.mpr
-        (ContinuousMap.norm_normalizeOfNoZero V hV q)⟩
-      continuous_toFun := N.continuous.subtype_mk _
-      map_zero_left z := by
-        apply Subtype.ext
-        change N (0, z) = NormedSpace.normalize (-a)
-        rw [ContinuousMap.normalizeOfNoZero_apply]
-        change NormedSpace.normalize ((0 : ℝ) • (z : ℂ) - a) =
-          NormedSpace.normalize (-a)
-        simp only [zero_smul, zero_sub]
-      map_one_left z := by
-        apply Subtype.ext
-        change N (1, z) = (((X - C a : ℂ[X]).normalizedCircleMap h z) : ℂ)
-        rw [ContinuousMap.normalizeOfNoZero_apply, normalizedCircleMap_apply]
-        change NormedSpace.normalize ((1 : ℝ) • (z : ℂ) - a) =
-          ‖(X - C a : ℂ[X]).eval (z : ℂ)‖⁻¹ • (X - C a : ℂ[X]).eval (z : ℂ)
-        simp only [one_smul, NormedSpace.normalize, eval_sub, eval_X, eval_C] }
-  exact (Circle.degree_eq_of_homotopic ⟨H⟩).symm.trans (Circle.degree_const c)
+  have hClosed : ∀ w : ℂ, ‖w‖ ≤ 1 → (X - C a : ℂ[X]).eval w ≠ 0 := by
+    intro w hw hw0
+    have heq : w = a := sub_eq_zero.mp (by simpa only [eval_sub, eval_X, eval_C] using hw0)
+    rw [heq] at hw
+    exact (not_le_of_gt ha) hw
+  exact degree_normalizedCircleMap_eq_zero_of_forall_norm_le_one (X - C a) hClosed
 
 /-- The normalized boundary map of `X - C a` has degree one when `a` lies
 strictly inside the unit disk and degree zero otherwise. Boundary nonvanishing
