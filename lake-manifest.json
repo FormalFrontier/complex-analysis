@@ -109,6 +109,54 @@
       "inputRev": "v4.34.0-rc2",
       "inherited": true,
       "configFile": "lakefile.toml"
+    },
+    {
+      "url": "https://github.com/FormalFrontier/simplicial-objects",
+      "type": "git",
+      "subDir": null,
+      "scope": "",
+      "rev": "143f667bdeb0aeccd02e6475781d5c456f00c95b",
+      "name": "«simplicial-objects»",
+      "manifestFile": "lake-manifest.json",
+      "inputRev": "143f667bdeb0aeccd02e6475781d5c456f00c95b",
+      "inherited": true,
+      "configFile": "lakefile.toml"
+    },
+    {
+      "url": "https://github.com/FormalFrontier/fundamental-groupoids",
+      "type": "git",
+      "subDir": null,
+      "scope": "",
+      "rev": "edbef2ae0d8a0871b0bbfbc47214e8d6542a2b8e",
+      "name": "«fundamental-groupoids»",
+      "manifestFile": "lake-manifest.json",
+      "inputRev": "edbef2ae0d8a0871b0bbfbc47214e8d6542a2b8e",
+      "inherited": true,
+      "configFile": "lakefile.toml"
+    },
+    {
+      "url": "https://github.com/FormalFrontier/group-theory.git",
+      "type": "git",
+      "subDir": null,
+      "scope": "",
+      "rev": "12ea07a60c5e6c219d8996eb56d7485139041e15",
+      "name": "groupTheory",
+      "manifestFile": "lake-manifest.json",
+      "inputRev": "12ea07a60c5e6c219d8996eb56d7485139041e15",
+      "inherited": true,
+      "configFile": "lakefile.toml"
+    },
+    {
+      "url": "https://github.com/FormalFrontier/sphere-topology.git",
+      "type": "git",
+      "subDir": null,
+      "scope": "",
+      "rev": "4b3c3b4ae344f28749d8e8f592fd7eacf7069a09",
+      "name": "«sphere-topology»",
+      "manifestFile": "lake-manifest.json",
+      "inputRev": "4b3c3b4ae344f28749d8e8f592fd7eacf7069a09",
+      "inherited": false,
+      "configFile": "lakefile.toml"
     }
   ],
   "name": "complexAnalysis",
