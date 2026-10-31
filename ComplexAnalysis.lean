@@ -8,6 +8,7 @@ public import ComplexAnalysis.Analysis.Complex.FiniteDimensional
 public import ComplexAnalysis.Analysis.Complex.PolydiscAnalytic
 public import ComplexAnalysis.Analysis.Complex.PolydiscKernel
 public import ComplexAnalysis.Analysis.Complex.PolynomialBoundary
+public import ComplexAnalysis.Analysis.Complex.PolynomialExterior
 public import ComplexAnalysis.Analysis.Complex.TorusCauchy
 public import ComplexAnalysis.Analysis.Complex.TorusKernel
 public import ComplexAnalysis.MeasureTheory.Integral.ContinuousMap
@@ -17,5 +18,6 @@ public import ComplexAnalysis.MeasureTheory.Integral.ContinuousMap
 
 This root module exports the finite-dimensional differentiability–analyticity
 equivalence, its polydisc Cauchy formula, analytic kernels, bounded integration
-of continuous vector-valued functions, and normalized polynomial boundary maps.
+of continuous vector-valued functions, normalized polynomial boundary maps,
+and the exterior root-scaling homotopy and degree statement.
 -/

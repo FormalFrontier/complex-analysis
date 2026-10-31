@@ -157,6 +157,18 @@
       "inputRev": "4b3c3b4ae344f28749d8e8f592fd7eacf7069a09",
       "inherited": false,
       "configFile": "lakefile.toml"
+    },
+    {
+      "url": "https://github.com/FormalFrontier/polynomial-root-stability.git",
+      "type": "git",
+      "subDir": null,
+      "scope": "",
+      "rev": "545e66a419e613f063b3be1a7b482325d63d7162",
+      "name": "«polynomial-root-stability»",
+      "manifestFile": "lake-manifest.json",
+      "inputRev": "545e66a419e613f063b3be1a7b482325d63d7162",
+      "inherited": false,
+      "configFile": "lakefile.toml"
     }
   ],
   "name": "complexAnalysis",

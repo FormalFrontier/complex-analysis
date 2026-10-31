@@ -13,6 +13,11 @@ name = "sphere-topology"
 git = "https://github.com/FormalFrontier/sphere-topology.git"
 rev = "4b3c3b4ae344f28749d8e8f592fd7eacf7069a09"
 
+[[require]]
+name = "polynomial-root-stability"
+git = "https://github.com/FormalFrontier/polynomial-root-stability.git"
+rev = "545e66a419e613f063b3be1a7b482325d63d7162"
+
 [leanOptions]
 autoImplicit = false
 relaxedAutoImplicit = false
@@ -25,6 +30,7 @@ globs = ["ComplexAnalysis", "ComplexAnalysis.Analysis.Complex.FiniteDimensional"
   "ComplexAnalysis.Analysis.Complex.PolydiscAnalytic",
   "ComplexAnalysis.Analysis.Complex.PolydiscKernel",
   "ComplexAnalysis.Analysis.Complex.PolynomialBoundary",
+  "ComplexAnalysis.Analysis.Complex.PolynomialExterior",
   "ComplexAnalysis.Analysis.Complex.TorusCauchy",
   "ComplexAnalysis.Analysis.Complex.TorusKernel",
   "ComplexAnalysis.MeasureTheory.Integral.ContinuousMap"]

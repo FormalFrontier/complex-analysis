@@ -28,6 +28,14 @@ The library also constructs normalized boundary maps of complex polynomials.
   strictly inside the unit disk, counted with multiset multiplicity. Nonmonic
   polynomials, repeated roots and nonzero constants of arbitrary phase are included.
 
+- **Exterior polynomial root-scaling homotopy**
+  ([`Polynomial.normalizedCircleMapScaleRootsHomotopy`](ComplexAnalysis/Analysis/Complex/PolynomialExterior.lean)).
+  If `p.eval w ≠ 0` whenever `1 ≤ ‖w‖`, root scaling over the real unit interval
+  joins the normalized leading monomial to the canonical normalized boundary map.
+  Its characteristic value is `normalize ((p.scaleRoots (t : ℂ)).eval z)`.
+  The leading coefficient's arbitrary phase is retained; the corresponding degree
+  statement is `Circle.degree (p.normalizedCircleMap _) = (p.natDegree : ℤ)`.
+
 ## Using the library
 
 Add it to your `lakefile.toml`:
@@ -53,8 +61,8 @@ example (f : EuclideanSpace ℂ (Fin 2) → ℂ)
 
 ## Building
 
-The Lean toolchain is pinned in `lean-toolchain`; Mathlib, Sphere Topology and
-all other dependencies are pinned in `lake-manifest.json`.
+The Lean toolchain is pinned in `lean-toolchain`; Mathlib, Sphere Topology,
+Polynomial Root Stability and all other dependencies are pinned in `lake-manifest.json`.
 
 ```sh
 lake exe cache get && lake build
@@ -68,6 +76,7 @@ lake exe cache get && lake build
 | `ComplexAnalysis.Analysis.Complex.PolydiscAnalytic` | Analyticity at the origin from the polydisc Cauchy formula. |
 | `ComplexAnalysis.Analysis.Complex.PolydiscKernel` | Banach-algebra-valued Cauchy kernels and vector-valued multiplication. |
 | `ComplexAnalysis.Analysis.Complex.PolynomialBoundary` | Normalized polynomial boundary maps, constant and linear-factor degrees, and the interior-root multiplicity formula. |
+| `ComplexAnalysis.Analysis.Complex.PolynomialExterior` | Exterior root-scaling homotopy and boundary degree, retaining the leading phase and including nonzero constants. |
 | `ComplexAnalysis.Analysis.Complex.TorusCauchy` | Iterated torus Cauchy integral formula for polydiscs. |
 | `ComplexAnalysis.Analysis.Complex.TorusKernel` | Torus kernel and its scalar boundary identities. |
 | `ComplexAnalysis.MeasureTheory.Integral.ContinuousMap` | Bounded Bochner integration and normalized angular-cube averaging. |
@@ -86,26 +95,30 @@ The integration module itself applies to continuous functions on compact
 measured spaces with finite Borel measure, independently of complex
 differentiability. No sheaf or geometric theorem is asserted.
 
-The polynomial boundary-degree proof uses Mathlib's existing algebraic closedness
-of `ℂ` (the fundamental theorem of algebra), its split-polynomial induction and
-root multisets, and Sphere Topology's additivity of circle degree under pointwise
-multiplication. Polynomials nonvanishing on the closed unit disk also carry an
-explicit disk-scaling homotopy from their constant phase at zero to their
-normalized boundary map; consequently this boundary map has degree zero.
-The library does not give a new proof of the fundamental theorem of algebra or
-construct the exterior homotopy in the preceding §7 argument.
+The interior-root multiplicity formula uses Mathlib's existing algebraic
+closedness of `ℂ` (the fundamental theorem of algebra), its split-polynomial
+induction and root multisets, and Sphere Topology's additivity of circle degree
+under pointwise multiplication. Polynomials nonvanishing on the closed unit disk
+also carry an explicit disk-scaling homotopy from their constant phase at zero
+to their normalized boundary map; consequently this boundary map has degree zero.
+The exterior root-scaling family is distinct: its degree route uses the leading
+phase, products, powers and homotopy invariance, not the root-count formula.
+No new fundamental theorem of algebra is asserted.
 
 ## References
 
 - The classical Cauchy integral formula and its iterated polydisc form.
 - J. Peter May, *A Concise Course in Algebraic Topology*, Chapter 1, §7,
-  Problem (1), for polynomial boundary degree and root multiplicity.
+  proof of the fundamental theorem of algebra, pp. 10–11, for root scaling;
+  Problem (1), p. 11, for polynomial boundary degree and root multiplicity.
 
 ## Credits and license
 
 Authors: Formal Frontier Agents. The mathematical ideas use the classical
-Cauchy formula, Banach-algebra inversion, May's polynomial boundary-degree problem,
+Cauchy formula, Banach-algebra inversion, May's exterior root-scaling argument
+and polynomial boundary-degree problem,
 Mathlib's analytic, polynomial (including the fundamental theorem of algebra) and
-integration APIs, and Sphere Topology's normalization and circle-degree APIs;
+integration APIs, Sphere Topology's normalization and circle-degree APIs, and
+Polynomial Root Stability's continuity and nonvanishing API for root scaling;
 AI agents assisted in the Lean development and documentation.
 Licensed under Apache-2.0; see `LICENSE`.
