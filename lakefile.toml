@@ -33,7 +33,8 @@ globs = ["ComplexAnalysis", "ComplexAnalysis.Analysis.Complex.FiniteDimensional"
   "ComplexAnalysis.Analysis.Complex.PolynomialExterior",
   "ComplexAnalysis.Analysis.Complex.TorusCauchy",
   "ComplexAnalysis.Analysis.Complex.TorusKernel",
-  "ComplexAnalysis.MeasureTheory.Integral.ContinuousMap"]
+  "ComplexAnalysis.MeasureTheory.Integral.ContinuousMap",
+  "ComplexAnalysis.MeasureTheory.Integral.Kernel"]
 
 [[lean_lib]]
 name = "ComplexAnalysisTest"
@@ -42,4 +43,5 @@ globs = ["ComplexAnalysisTest", "ComplexAnalysisTest.Analysis.Complex.FiniteDime
   "ComplexAnalysisTest.Analysis.Complex.PolydiscKernel",
   "ComplexAnalysisTest.Analysis.Complex.TorusCauchy",
   "ComplexAnalysisTest.Analysis.Complex.TorusKernel",
-  "ComplexAnalysisTest.MeasureTheory.Integral.ContinuousMap"]
+  "ComplexAnalysisTest.MeasureTheory.Integral.ContinuousMap",
+  "ComplexAnalysisTest.MeasureTheory.Integral.Kernel"]

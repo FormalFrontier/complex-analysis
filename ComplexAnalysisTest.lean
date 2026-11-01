@@ -10,6 +10,7 @@ public import ComplexAnalysisTest.Analysis.Complex.PolydiscKernel
 public import ComplexAnalysisTest.Analysis.Complex.TorusCauchy
 public import ComplexAnalysisTest.Analysis.Complex.TorusKernel
 public import ComplexAnalysisTest.MeasureTheory.Integral.ContinuousMap
+public import ComplexAnalysisTest.MeasureTheory.Integral.Kernel
 
 /-!
 # Examples of finite-dimensional analyticity and Cauchy integration

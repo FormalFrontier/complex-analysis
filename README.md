@@ -36,6 +36,14 @@ The library also constructs normalized boundary maps of complex polynomials.
   The leading coefficient's arbitrary phase is retained; the corresponding degree
   statement is `Circle.degree (p.normalizedCircleMap _) = (p.natDegree : ℤ)`.
 
+- **Compact scalar-kernel operators**
+  ([`ContinuousMap.kernelOperator`](ComplexAnalysis/MeasureTheory/Integral/Kernel.lean)).
+  A continuous scalar kernel on `X × Y`, with compact `Y` and a finite Borel
+  measure, gives a compact complex-linear map from `L²(Y, μ)` to `C(X, ℂ)`.
+  The parameter space `X` is arbitrary; compactness of `X` is needed only for
+  the sup-norm bound. The construction uses a generic transpose of an
+  operator-norm-continuous field, compact whenever its normed target is proper.
+
 ## Using the library
 
 Add it to your `lakefile.toml`:
@@ -80,6 +88,7 @@ lake exe cache get && lake build
 | `ComplexAnalysis.Analysis.Complex.TorusCauchy` | Iterated torus Cauchy integral formula for polydiscs. |
 | `ComplexAnalysis.Analysis.Complex.TorusKernel` | Torus kernel and its scalar boundary identities. |
 | `ComplexAnalysis.MeasureTheory.Integral.ContinuousMap` | Bounded Bochner integration and normalized angular-cube averaging. |
+| `ComplexAnalysis.MeasureTheory.Integral.Kernel` | Continuous fields of operators, compact transposes, and finite-measure scalar kernels. |
 
 The `ComplexAnalysisTest` clients cover nonvacuity, zero dimension, nonlinear
 maps on proper open sets, vector-valued targets, and kernel evaluation.
