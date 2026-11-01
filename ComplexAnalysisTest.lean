@@ -9,6 +9,7 @@ public import ComplexAnalysisTest.Analysis.Complex.PolydiscAnalytic
 public import ComplexAnalysisTest.Analysis.Complex.PolydiscKernel
 public import ComplexAnalysisTest.Analysis.Complex.TorusCauchy
 public import ComplexAnalysisTest.Analysis.Complex.TorusKernel
+public import ComplexAnalysisTest.Analysis.InnerProductSpace.CompactOperator
 public import ComplexAnalysisTest.MeasureTheory.Integral.ContinuousMap
 public import ComplexAnalysisTest.MeasureTheory.Integral.Kernel
 
@@ -16,5 +17,6 @@ public import ComplexAnalysisTest.MeasureTheory.Integral.Kernel
 # Examples of finite-dimensional analyticity and Cauchy integration
 
 These external clients exercise the analytic and integration APIs, including
-nonlinear maps on proper open sets and the zero-dimensional cases.
+nonlinear maps on proper open sets, the zero-dimensional cases, and moved
+vectors in finite eigenspaces of compact positive squares.
 -/

@@ -44,6 +44,13 @@ The library also constructs normalized boundary maps of complex polynomials.
   the sup-norm bound. The construction uses a generic transpose of an
   operator-norm-continuous field, compact whenever its normed target is proper.
 
+- **Detecting finite eigenspaces of compact positive squares**
+  ([`ContinuousLinearMap.exists_eigenvector_comp_adjoint_detected`](ComplexAnalysis/Analysis/InnerProductSpace/CompactOperator.lean)).
+  On an arbitrary complete real or complex Hilbert space, compact `T` and
+  continuous linear `B` with `B.comp T ≠ 0` give a nonzero eigenvalue of
+  `T.comp T.adjoint` whose finite-dimensional eigenspace contains a vector
+  `v` with `B v ≠ 0`. No separability or commutation hypothesis is needed.
+
 ## Using the library
 
 Add it to your `lakefile.toml`:
@@ -87,11 +94,13 @@ lake exe cache get && lake build
 | `ComplexAnalysis.Analysis.Complex.PolynomialExterior` | Exterior root-scaling homotopy and boundary degree, retaining the leading phase and including nonzero constants. |
 | `ComplexAnalysis.Analysis.Complex.TorusCauchy` | Iterated torus Cauchy integral formula for polydiscs. |
 | `ComplexAnalysis.Analysis.Complex.TorusKernel` | Torus kernel and its scalar boundary identities. |
+| `ComplexAnalysis.Analysis.InnerProductSpace.CompactOperator` | Zero-product compatibility and detecting finite eigenspaces of compact positive squares. |
 | `ComplexAnalysis.MeasureTheory.Integral.ContinuousMap` | Bounded Bochner integration and normalized angular-cube averaging. |
 | `ComplexAnalysis.MeasureTheory.Integral.Kernel` | Continuous fields of operators, compact transposes, and finite-measure scalar kernels. |
 
 The `ComplexAnalysisTest` clients cover nonvacuity, zero dimension, nonlinear
-maps on proper open sets, vector-valued targets, and kernel evaluation.
+maps on proper open sets, vector-valued targets, kernel evaluation, and a vector
+moved by a prescribed linear map in a finite eigenspace.
 
 ## Conventions and limitations
 
@@ -126,8 +135,9 @@ No new fundamental theorem of algebra is asserted.
 Authors: Formal Frontier Agents. The mathematical ideas use the classical
 Cauchy formula, Banach-algebra inversion, May's exterior root-scaling argument
 and polynomial boundary-degree problem,
-Mathlib's analytic, polynomial (including the fundamental theorem of algebra) and
-integration APIs, Sphere Topology's normalization and circle-degree APIs, and
+Mathlib's analytic, polynomial (including the fundamental theorem of algebra),
+integration and compact self-adjoint spectral APIs, Sphere Topology's
+normalization and circle-degree APIs, and
 Polynomial Root Stability's continuity and nonvanishing API for root scaling;
 AI agents assisted in the Lean development and documentation.
 Licensed under Apache-2.0; see `LICENSE`.

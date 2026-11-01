@@ -33,6 +33,7 @@ globs = ["ComplexAnalysis", "ComplexAnalysis.Analysis.Complex.FiniteDimensional"
   "ComplexAnalysis.Analysis.Complex.PolynomialExterior",
   "ComplexAnalysis.Analysis.Complex.TorusCauchy",
   "ComplexAnalysis.Analysis.Complex.TorusKernel",
+  "ComplexAnalysis.Analysis.InnerProductSpace.CompactOperator",
   "ComplexAnalysis.MeasureTheory.Integral.ContinuousMap",
   "ComplexAnalysis.MeasureTheory.Integral.Kernel"]
 
@@ -43,5 +44,6 @@ globs = ["ComplexAnalysisTest", "ComplexAnalysisTest.Analysis.Complex.FiniteDime
   "ComplexAnalysisTest.Analysis.Complex.PolydiscKernel",
   "ComplexAnalysisTest.Analysis.Complex.TorusCauchy",
   "ComplexAnalysisTest.Analysis.Complex.TorusKernel",
+  "ComplexAnalysisTest.Analysis.InnerProductSpace.CompactOperator",
   "ComplexAnalysisTest.MeasureTheory.Integral.ContinuousMap",
   "ComplexAnalysisTest.MeasureTheory.Integral.Kernel"]

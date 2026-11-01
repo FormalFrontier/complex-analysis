@@ -11,6 +11,7 @@ public import ComplexAnalysis.Analysis.Complex.PolynomialBoundary
 public import ComplexAnalysis.Analysis.Complex.PolynomialExterior
 public import ComplexAnalysis.Analysis.Complex.TorusCauchy
 public import ComplexAnalysis.Analysis.Complex.TorusKernel
+public import ComplexAnalysis.Analysis.InnerProductSpace.CompactOperator
 public import ComplexAnalysis.MeasureTheory.Integral.ContinuousMap
 public import ComplexAnalysis.MeasureTheory.Integral.Kernel
 
@@ -21,5 +22,6 @@ This root module exports the finite-dimensional differentiability–analyticity
 equivalence, its polydisc Cauchy formula, analytic kernels, bounded integration
 of continuous vector-valued functions, compact scalar-kernel operators,
 normalized polynomial boundary maps,
-and the exterior root-scaling homotopy and degree statement.
+the exterior root-scaling homotopy and degree statement, and detecting finite
+eigenspaces of compact positive squares on complete real or complex Hilbert spaces.
 -/
