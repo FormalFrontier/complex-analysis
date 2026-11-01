@@ -223,6 +223,13 @@ noncomputable def kernelOperator (μ : Measure Y) [IsFiniteMeasure μ]
        ((ContinuousMap.toLp (E := ℂ) (2 : ℝ≥0∞) μ ℂ).continuous.comp
          κ.curry.continuous.star) } : C(X, Lp ℂ (2 : ℝ≥0∞) μ →L[ℂ] ℂ)).flipLinear
 
+/-- Evaluation of a scalar-kernel operator as the `L²` inner product with its
+conjugate kernel section. -/
+theorem kernelOperator_apply_eq_inner (μ : Measure Y) [IsFiniteMeasure μ]
+    (κ : C(X × Y, ℂ)) (u : Lp ℂ (2 : ℝ≥0∞) μ) (x : X) :
+    kernelOperator μ κ u x =
+      inner ℂ (ContinuousMap.toLp (E := ℂ) (2 : ℝ≥0∞) μ ℂ (star (κ.curry x))) u := rfl
+
 private theorem kernelOperator_eq_flipLinear (μ : Measure Y) [IsFiniteMeasure μ]
     (κ : C(X × Y, ℂ)) :
     kernelOperator μ κ = (kernelFunctional μ κ).flipLinear := rfl
